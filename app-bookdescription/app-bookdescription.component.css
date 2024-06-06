@@ -1,0 +1,247 @@
+article {
+
+}
+
+.btn-msg{
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: space-between;
+    flex-direction: column;
+
+}
+.msg_container {
+    border-radius: 8px;
+    max-width: 60rem;
+    width: 100%;
+    background-color: #f5f5f5;
+    margin-top: 2rem !important;
+    margin: 0 auto;
+}
+.comment-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #f8f8f8;
+  }
+  
+  .comment-box h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .comment-box h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .comment-box label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .comment-box input[type="text"],
+  .comment-box input[type="email"],
+  .comment-box textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .comment-box .comment {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+  }
+  
+  .comment-box .comment:last-child {
+    border-bottom: none;
+  }
+  
+  .comment-box .comment h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .comment-box .comment p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .comment-box form {
+    margin-top: 20px;
+  }
+  
+  .comment-box form h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .comment-box form button, .deleteBtn{
+    background-color: var(--btn-bg-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 40px;
+  }
+  
+  .comment-box form button:hover {
+    background-color: #0069d9;
+  }
+  
+  .comment-box form button:focus {
+    outline: none;
+  }
+  
+  .comment-box form label.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+  }
+  
+  .comment-box form input.error,
+  .comment-box form textarea.error {
+    border-color: red;
+  }
+  
+  .comment-box form input.valid,
+  .comment-box form textarea.valid {
+    border-color: green;
+  }
+  
+
+
+
+/*nuevo*/
+.description_container  {
+  display: block;
+    background-color: var(--bkg-color);
+    width: 100%;
+ 
+    padding-top: 30px;
+    padding-bottom: 60px;
+   
+}
+.book_description_container {
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 60rem;
+    width: 100%;
+    background-color: #f5f5f5;
+    margin-top: 2rem !important;
+    margin-bottom: 30px;
+    margin: 0 auto;
+}
+
+.left_content,
+.right_content {
+    padding: 2rem;
+}
+
+.left_content .book_image_content {
+    background-color: black;
+    width: 18rem;
+    height: 25rem;
+    margin: 0 auto;
+}
+
+.left_content .book_image_content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.left_content .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.left_content .buttons button {
+    background-color: rgb(164, 106, 40);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.left_content .buttons svg {
+    width: 1.5rem;
+    height: 1.5rem; 
+    margin: auto 1rem;
+    color: rgb(164, 106, 40);
+}
+
+.left_content .buttons svg:hover {
+    color: rgb(206, 137, 59);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.left_content .buttons button:hover {
+    background-color: rgb(206, 137, 59);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.right_content .book_details {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+.right_content .book_details h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.right_content .book_details p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.right_content .book_details span {
+    font-weight: 600;
+}
+
+.dropdown-item{
+  cursor: pointer;
+}
+
+@media (max-width: 880px) {
+    .book_description_container {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .book_description_container {
+        grid-template-columns: 1fr;
+        gap: 0;
+        max-width: 35rem;
+    }
+
+    .right_content .book_details h1 {
+        font-size: 1.2rem;
+    }
+
+    .right_content .book_details p {
+        font-size: 1rem;
+    }
+
+
+}

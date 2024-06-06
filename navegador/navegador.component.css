@@ -1,0 +1,94 @@
+.navbar{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+    background-color: var(--bkg-color) !important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+    color: var(--btn-bg-color);
+}
+
+.navbar a{
+    color: var(--btn-bg-color);
+    margin-left: 1rem;
+}
+.navbar-nav {
+    position: fixed;
+    right: 20px;
+    /*background-color: black;*/
+}
+
+.navbar .navbar-brand {
+    margin: 0;
+}
+
+.navbar-brand img {
+    width: 60%;
+}
+
+.nav-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-inline:10px;
+    cursor: pointer;
+}
+.dropdown-menu {
+    background-color: var(--bkg-color) !important;
+    position: fixed !important;
+    top: 44px !important;
+    left: unset !important;
+    right: 0;
+}
+/*Estilos al hacer scroll*/
+.nav__black {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background-color: var(--btn-bg-color)!important;
+}
+.navbar-brand_{
+    color: white !important;
+}
+
+/*Estilos al estar log*/
+.menu-log {
+    display:none
+}
+
+
+
+@media screen and (max-width: 1199px) and (min-width: 701px) {
+    
+
+}
+
+@media screen and (max-width: 700px) {
+    .navbar-nav {
+        background-color: var(--bkg-color);
+        /*#16161a*/
+    }
+
+    .nav-icon {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-item a, .nav-icon svg {
+        color: var(--btn-bg-color) !important; 
+
+    }
+}
+
+
+#collapseExample {
+    position: relative;
+}

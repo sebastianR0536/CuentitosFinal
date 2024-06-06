@@ -1,0 +1,104 @@
+/*SVG*/
+img, svg {
+  vertical-align: middle;
+  color: var(--btn-bg-color);
+}
+
+/* Sección principal */
+#main {
+  display: flex;
+  margin-top: 60px;
+  margin-left: 270px;
+}
+
+.adminContent, .clm {
+  width: 100%;
+}
+
+#adminFooter {
+  margin-top: 0px !important;
+}
+
+/* Botones Sección superior (añadir y eliminar)*/
+.topButtons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  /* margin-left: 20px; */
+  justify-content: space-around;
+  /* align-content: space-between; */
+  flex-wrap: nowrap;
+}
+
+.btn1 {
+  padding: 8px 12px;
+  font-family: 'Montserrat', sans-serif;
+  border: 2px solid #78788c;
+  background: 0;
+  cursor: pointer;
+  transition: all .5s;
+  width: 30%;
+  margin-left: 5px;
+  font-size: 10px;
+}
+
+.btn1:hover {
+  color: white;
+  cursor: pointer;
+}
+
+#añadirBtn:hover {
+  background-color: #4CAF50;
+}
+
+#eliminarBtn:hover {
+  background-color: #e91111;
+}
+
+/* Grid de elementos del dashboard */
+.grid {
+  display: grid;
+  grid-template-columns: 225px repeat(4, 1fr);
+  gap: 2em;
+  margin: 2em 2em 2em 2em;
+  grid-auto-flow: row dense;
+}
+
+/* Encabezado del dashboard*/
+.headerDashboard {
+  align-items: center;
+  background-color: #f2f2f2;
+  display: grid;
+  grid-template-columns: 4em, repeat(4, 1fr);
+  place-items: center;
+}
+
+/* Elementos del dashboard*/
+.elementDashboard {
+  align-items: center;
+  background-color: var(--bkg-color);
+  color: var(--text-color);
+  border: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: 4em, repeat(4, 1fr);
+  place-items: center;
+}
+
+/* Elemento del dashboard*/
+.el {
+  padding: 5px;
+  margin-bottom: 0;
+}
+
+/* Conjunto de botones de cada elemento del dashboard*/
+.optionButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+/* Botones de cada elemento del Dashboard*/
+.btn:hover {
+  color: #007bff;
+}

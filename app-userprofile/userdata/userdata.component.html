@@ -1,0 +1,80 @@
+<div class="grid-userinformation">
+    <div>
+        <div class="field">
+        <h1><b>{{ "userprofile.userdata" | transloco }}</b></h1>
+        </div>
+        <div class="field">
+            <label><b>{{ "userprofile.name" | transloco }}:</b></label>
+            <input type="text" [(ngModel)]="username" [disabled]="!editar">
+        </div>
+        <div class="field">
+            <label><b>{{ "userprofile.email" | transloco }}:</b></label>
+            <input type="text" [(ngModel)]="email" [disabled]="!editar">
+            <p class="verificación" *ngIf="!verificado">{{ "userprofile.emailverify" | transloco }}: <button class="btn btn-primary">{{ "userprofile.verify" | transloco }}</button></p>
+        </div>
+        <div class="field">
+            <label><b>{{ "userprofile.changepassword" | transloco }}:</b></label>
+            <form name="form" [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+                <div class="inputerror">
+                    <input type="password" placeholder='{{ "userprofile.newpassword" | transloco }}' formControlName="newPassword">
+                    <div class="errores">
+                        <div *ngIf="passwordForm.get('newPassword')?.errors?.['required'] && aparecenErrores">
+                            · El campo es obligatorio.
+                        </div>
+                        <div *ngIf="passwordForm.get('newPassword')?.errors?.['minlength'] && aparecenErrores">
+                            · Contraseña demasiado corta.(6 caracteres como mínimo)
+                        </div>
+                        <div *ngIf="passwordForm.get('newPassword')?.errors?.['maxlength'] && aparecenErrores">
+                            · Contraseña demasiado larga.(9 caracteres como máximo)
+                        </div>
+                    </div>
+                </div>
+                <div class="inputerror">
+                    <input class="inputerror" type="password" placeholder='{{ "userprofile.repeatpassword" | transloco }}' formControlName="replynewPassword">
+                    <div class="errores">
+                        <div *ngIf="passwordForm.get('replynewPassword')?.errors?.['required'] && aparecenErrores">
+                            · El campo es obligatorio.
+                        </div>
+                        <div  *ngIf="passwordForm.get('replynewPassword')?.errors?.['minlength'] && aparecenErrores">
+                            · Contraseña demasiado corta.(6 caracteres como mínimo)
+                        </div>
+                        <div  *ngIf="passwordForm.get('replynewPassword')?.errors?.['maxlength'] && aparecenErrores">
+                            · Contraseña demasiado larga.(9 caracteres como máximo)
+                        </div>
+                    </div>
+                </div>
+                <div class="inputerror">
+                    <input class="btn btn-primary" type="submit" value='{{ "userprofile.change" | transloco }}'>
+                </div>
+            </form>
+        </div>
+        <div class="field buttonsModify">
+            <div>
+            <button class="btn btn-primary" *ngIf="editar" (click)="aceptarEdicion()">{{ "userprofile.acceptchange" | transloco }}</button>
+            <button class="btn btn-primary" *ngIf="editar" (click)="cancelarEdicion()">{{ "userprofile.cancelchange" | transloco }}</button>
+            <button class="btn btn-primary" *ngIf="!editar" (click)="editarInformacion()">{{ "userprofile.editinfo" | transloco }}</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="field">
+            <h1><b>{{ "userprofile.plandata" | transloco }}</b></h1>
+            </div>
+        <div class="field">
+            <label><b>{{ "userprofile.plan" | transloco }}:</b></label>
+            <p class="plan">{{plan}}</p>
+          <div>
+            <button class="btn btn-primary">{{ "userprofile.changeplan" | transloco }}</button>
+            <button class="btn btn-danger" (click)="cancelPlan()">{{ "userprofile.cancelplan" | transloco }}</button>
+          </div>
+        </div>
+        <div class="field">
+            <label><b>{{ "userprofile.startplan" | transloco }}:</b></label>
+            <p class="plan">{{dateInit}}</p>
+        </div>
+        <div class="field">
+            <label><b>{{ "userprofile.endplan" | transloco }}:</b></label>
+            <p class="plan">{{dateFinal}}</p>
+        </div>
+    </div>
+</div>

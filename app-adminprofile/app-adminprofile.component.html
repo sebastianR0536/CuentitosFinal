@@ -1,0 +1,603 @@
+<app-navegador></app-navegador>
+<app-aside (usersClicked)="changestate($event)"></app-aside>
+<section id="main">
+    <div class="clm">
+        <div class="adminContent">
+            <!-- LIBROS -->
+            <div *ngIf="booksClicked; else usersClicked">
+                <!-- topButtons -->
+                <div class="topButtons">
+                    <button type="button" class="btn1 btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"
+                        id="añadirBtn">
+                        {{ "admin.add" | transloco }}
+                    </button>
+                    <button class="btn1" id="eliminarBtn" data-bs-toggle="modal" data-bs-target="#deleteModal2">
+                        {{"admin.eliminarSeleccionados" | transloco}}
+                    </button>
+                </div>
+
+
+                <!-- header -->
+                <div class="headerDashboard grid">
+                    <h2 class="el">{{ "admin.action" | transloco }}</h2>
+                    <h2 class="el">{{ "admin.name" | transloco }}</h2>
+                    <h2 class="el">{{ "admin.editorial" | transloco }}</h2>
+                    <h2 class="el">{{"admin.genero" | transloco}}</h2>
+                    <h2 class="el">{{ "admin.isbn" | transloco }}</h2>
+                </div>
+
+
+                <!-- elements -->
+                <div class="elementDashboard grid" *ngFor="let a of books">
+                    <div class="optionButtons">
+                        <div class="form-check">
+                            <input class="form-check-input form-check" type="checkbox" value=""
+                                id="checkbox_{{ a.id }}" />
+                            <label class="form-check-label form-check" for="flexCheckDefault"></label>
+                        </div>
+
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                            (click)="getCurrentBook(a)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                            </svg>
+                        </button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editBookModal"
+                            (click)="getCurrentBook(a)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                        </button>
+                        <button type="button" class="btn" (click)="viewBook(a)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <h2 class="el">{{ a.title }}</h2>
+                    <h2 class="el">{{ a.editorial }}</h2>
+                    <h2 class="el">{{ a.genre }}</h2>
+                    <h2 class="el">{{ a.isbn }}</h2>
+                </div>
+
+
+                <!-- addModal -->
+                <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    {{ "admin.addbook" | transloco }}
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" #modal>
+                                <div class="form-group">
+                                    <label for="title">Título:</label>
+                                    <input type="text" class="form-control" id="title" placeholder="Ingrese el título"
+                                        #title />
+                                </div>
+                                <div class="form-group">
+                                    <label for="sinopsis">Sinopsis:</label>
+                                    <input type="text" class="form-control" id="sinopsis"
+                                        placeholder="Ingrese la sinopsis" #sinopsis />
+                                </div>
+                                <div class="form-group">
+                                    <label for="author">Autor:</label>
+                                    <input type="text" class="form-control" id="author" placeholder="Ingrese el autor"
+                                        #author />
+                                </div>
+                                <div class="form-group">
+                                    <label for="publicationDate">Fecha de publicación:</label>
+                                    <input type="date" class="form-control" id="publicationDate"
+                                        placeholder="Ingrese la fecha de publicación" #publicationDate />
+                                </div>
+                                <div class="form-group">
+                                    <label for="uploadDate">Fecha de subida:</label>
+                                    <input type="date" class="form-control" id="uploadDate"
+                                        placeholder="Ingrese la fecha de subida" #uploadDate />
+                                </div>
+                                <div class="form-group">
+                                    <label for="editorial">Editorial:</label>
+                                    <input type="text" class="form-control" id="editorial"
+                                        placeholder="Ingrese la editorial" #editorial />
+                                </div>
+                                <div class="form-group">
+                                    <label for="isbn">ISBN:</label>
+                                    <input type="text" class="form-control" id="isbn" placeholder="Ingrese el ISBN"
+                                        #isbn />
+                                </div>
+                                <div class="form-group">
+                                    <label for="genre">Género:</label>
+                                    <input type="text" class="form-control" id="genre" placeholder="Ingrese el género"
+                                        #genre />
+                                </div>
+                                <div class="form-group">
+                                    <label for="url">URL:</label>
+                                    <input type="text" class="form-control" id="url" placeholder="Ingrese la URL"
+                                        #url />
+                                </div>
+                                <div class="form-group">
+                                    <label for="imageURL">URL de la imagen:</label>
+                                    <input type="text" class="form-control" id="imageURL"
+                                        placeholder="Ingrese la URL de la imagen" #imageURL />
+                                </div>
+                                <div class="form-group">
+                                    <label for="pages">Páginas:</label>
+                                    <input type="number" class="form-control" id="pages"
+                                        placeholder="Ingrese el número de páginas" #pages />
+                                </div>
+                                <div class="form-group">
+                                    <label for="pages">Lenguaje:</label>
+                                    <input  class="form-control" 
+                                        placeholder="Lenguaje" #lan />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    {{ "admin.close" | transloco }}
+                                </button>
+                                <button type="button" class="btn btn-primary" (click)="
+                      addBook(
+                        title.value,
+                        sinopsis.value,
+                        author.value,
+                        publicationDate.value,
+                        uploadDate.value,
+                        editorial.value,
+                        isbn.value,
+                        genre.value,
+                        url.value,
+                        imageURL.value,
+                        pages.value,
+                        lan.value
+                      )
+                    " data-bs-dismiss="modal">
+                                    {{ "admin.save" | transloco }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- editModal -->
+                <form #editForm="ngForm"
+                    (ngSubmit)="editBookForm(editForm, titleEdit.value, sinopsisEdit.value, authorEdit.value, publicationDateEdit.value,
+                        uploadDateEdit.value, editorialEdit.value, isbnEdit.value, genreEdit.value, urlEdit.value, imageURLEdit.value, pagesEdit.value, lanEdit.value)">
+                    <div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                        {{ "admin.editarLibro" | transloco }}
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" #modal>
+                                    <div class="form-group">
+                                        <label for="title">Título:</label>
+                                        <input type="text" class="form-control" id="titleEdit"
+                                            placeholder="Ingrese el título" #titleEdit value="{{ currentBook.title }}"
+                                            name="title" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sinopsis">Sinopsis:</label>
+                                        <input type="text" class="form-control" id="sinopsisEdit"
+                                            placeholder="Ingrese la sinopsis" #sinopsisEdit
+                                            value="{{ currentBook.sinopsis }}" name="sinopsis" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="author">Autor:</label>
+                                        <input type="text" class="form-control" id="authorEdit"
+                                            placeholder="Ingrese el autor" #authorEdit value="{{ currentBook.author }}"
+                                            name="author" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="publicationDate">Fecha de publicación:</label>
+                                        <input type="text" class="form-control" id="publicationDateEdit"
+                                            placeholder="Ingrese la fecha de publicación" #publicationDateEdit
+                                            value="{{ currentBook.publicationDate }}" name="publicationDate" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="uploadDate">Fecha de subida:</label>
+                                        <input type="text" class="form-control" id="uploadDateEdit"
+                                            placeholder="Ingrese la fecha de subida" #uploadDateEdit
+                                            value="{{ currentBook.uploadDate }}" name="uploadDate" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editorial">Editorial:</label>
+                                        <input type="text" class="form-control" id="editorialEdit"
+                                            placeholder="Ingrese la editorial" #editorialEdit
+                                            value="{{ currentBook.editorial }}" name="editorial" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="isbn">ISBN:</label>
+                                        <input type="text" class="form-control" id="isbnEdit"
+                                            placeholder="Ingrese el ISBN" #isbnEdit value="{{ currentBook.isbn }}"
+                                            name="isbn" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="genre">Género:</label>
+                                        <input type="text" class="form-control" id="genreEdit"
+                                            placeholder="Ingrese el género" #genreEdit value="{{ currentBook.genre }}"
+                                            name="genre" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="url">URL:</label>
+                                        <input type="text" class="form-control" id="urlEdit"
+                                            placeholder="Ingrese la URL" #urlEdit value="{{ currentBook.url }}"
+                                            name="url" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="imageURL">URL de la imagen:</label>
+                                        <input type="text" class="form-control" id="imageURLEdit"
+                                            placeholder="Ingrese la URL de la imagen" #imageURLEdit
+                                            value="{{ currentBook.imageURL }}" name="imageURL" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pages">Páginas:</label>
+                                        <input type="number" class="form-control" id="pagesEdit"
+                                            placeholder="Ingrese el número de páginas" #pagesEdit
+                                            value="{{ currentBook.pages }}" name="pages" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pages">Lenguaje:</label>
+                                        <input  class="form-control" 
+                                            placeholder="Lenguaje" value="{{ currentBook.lan }}" #lanEdit />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        {{ "admin.close" | transloco }}
+                                    </button>
+                                    <button type="button submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                        {{ "admin.save" | transloco }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+                <!-- deleteModal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+
+                                    {{ "admin.eliminarLibro" | transloco }}
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" #modal>
+                                <h1>¿{{ "admin.deseaEliminar" | transloco }} {{ currentBook.title }}?</h1>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    {{ "admin.close" | transloco }}
+                                </button>
+                                <button type="button" class="btn btn-primary"
+                                    (click)="firestoreService.deleteBook(currentBook.id)" data-bs-dismiss="modal">
+                                    {{ "admin.eliminar" | transloco }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- deleteModal2 -->
+                <div class="modal fade" id="deleteModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    {{ "admin.eliminarLibro" | transloco }}
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" #modal>
+                                <h1>¿{{ "admin.deseaEliminarLibros" | transloco }}?</h1>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        {{ "admin.close" | transloco }}
+                                    </button>
+                                    <button type="button" class="btn btn-primary" (click)="deleteSelectedBooks()"
+                                        data-bs-dismiss="modal">
+                                        {{ "admin.eliminar" | transloco }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- USUARIOS -->
+            <ng-template #usersClicked>
+                <!-- topButtons -->
+                <div class="topButtons">
+                    <!-- <button type="button" class="btn1 btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"
+                        id="añadirBtn">
+                        {{ "admin.add" | transloco }}
+                    </button> -->
+                    <button class="btn1" id="eliminarBtn" data-bs-toggle="modal" data-bs-target="#deleteModal2">
+                        {{"admin.eliminarSeleccionados" | transloco}}
+                    </button>
+                </div>
+
+                <!-- header -->
+                <div class="headerDashboard grid">
+                    <h2 class="el">{{ "admin.action" | transloco }}</h2>
+                    <h2 class="el">{{ "admin.name" | transloco }}</h2>
+                    <h2 class="el">{{ "admin.rol" | transloco }}</h2>
+                    <h2 class="el">{{ "admin.correo" | transloco }}</h2>
+                    <h2 class="el">PLAN</h2>
+                    <!--<h2 class="el">ESTADO</h2>-->
+                </div>
+
+                <!-- elements -->
+                <div class="elementDashboard grid" *ngFor="let a of users">
+                    <div class="optionButtons">
+                        <div class="form-check">
+                            <input class="form-check-input form-check" type="checkbox" value=""
+                                id="checkbox_{{ a.id }}" />
+                            <label class="form-check-label form-check" for="flexCheckDefault"></label>
+                        </div>
+
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                            (click)="getCurrentUser(a)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                            </svg>
+                        </button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editBookModal"
+                            (click)="getCurrentUser(a)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                        </button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#visualizeModal"
+                            (click)="getCurrentUser(a)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                <path
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <h2 class="el">{{ a.displayName }}</h2>
+                    <h2 class="el">{{ a.rol}}</h2>
+                    <h2 class="el">{{ a.email }}</h2>
+                    <h2 class="el">{{ a.plan }}</h2>
+                    <!--<h2 class="el">{{ a.emailVerified }}</h2>-->
+                </div>
+
+
+                <!-- addModal -->
+                <!-- <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    Añadir usuario
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" #modal>
+                                <input placeholder="email" #email />
+                                <input placeholder="displayName" #displayName />
+                                <input placeholder="photoURL" #photoURL />
+                                <input placeholder="plan" #plan />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="button" class="btn btn-primary" (click)="
+                      addUser(
+                        email.value,
+                        displayName.value,
+                        photoURL.value,
+                        plan.value
+                      )
+                    " data-bs-dismiss="modal">
+                                    Save changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <!-- deleteModal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    {{ "admin.eliminarUsuario" | transloco }}
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" #modal>
+                                <h1>¿{{ "admin.deseaEliminarUsuario" | transloco }} {{ currentUser.displayName }}?</h1>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    {{ "admin.close" | transloco }}
+                                </button>
+                                <button type="button" class="btn btn-primary"
+                                    (click)="firestoreService.deleteUser(currentUser.id)" data-bs-dismiss="modal">
+                                    {{ "admin.eliminar" | transloco }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- deleteModal2 -->
+                <div class="modal fade" id="deleteModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    {{ "admin.eliminarUsuario" | transloco }}
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" #modal>
+                                <h1>¿{{ "admin.deseaEliminarUsuarios" | transloco }}?</h1>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        {{ "admin.close" | transloco }}
+                                    </button>
+                                    <button type="button" class="btn btn-primary" (click)="deleteSelectedUsers()"
+                                        data-bs-dismiss="modal">
+                                        {{ "admin.eliminar" | transloco }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- editModal -->
+                <form #editForm="ngForm"
+                    (ngSubmit)="editUserForm(editForm, email.value, displayName.value, plan.value, photoURL.value)">
+                    <div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                        {{ "admin.editarUsuario" | transloco }}
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" #modal>
+                                    <div class="form-group">
+                                        <label for="email">Email:</label>
+                                        <input type="email" class="form-control" id="emailEdit"
+                                            placeholder="Ingrese el correo email" #email value="{{ currentUser.email }}"
+                                            name="email" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="displayName">Nombre de usuario:</label>
+                                        <input type="text" class="form-control" id="displayNameEdit"
+                                            placeholder="Ingrese el nombre de usuario" #displayName
+                                            value="{{ currentUser.displayName }}" name="displayName" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="photoURL">URL Foto de perfil:</label>
+                                        <input type="text" class="form-control" id="photoURLEdit"
+                                            placeholder="Ingrese la URL de la foto de perfil" #photoURL
+                                            value="{{ currentUser.photoURL }}" name="photoURL" ngModel />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="plan">Plan:</label>
+                                        <input type="text" class="form-control" id="planEdit"
+                                            placeholder="Ingrese la fecha de subida" #plan
+                                            value="{{ currentUser.plan }}" name="plan" ngModel />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        {{ "admin.close" | transloco }}
+                                    </button>
+                                    <button type="button submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                        {{ "admin.save" | transloco }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+                <!-- visualizeModal -->
+                <div class="modal fade" id="visualizeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-dialog-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    Usuario: {{ currentUser.displayName }}
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" #modal>
+                                <div class="form-group">
+                                    <label for="uid">uid:</label>
+                                    <p class="form-control-plaintext">{{ currentUser.uid }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="displayName">Nombre de usuario:</label>
+                                    <p class="form-control-plaintext">{{ currentUser.displayName }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <p class="form-control-plaintext">{{ currentUser.email }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailVerified">Email verificado:</label>
+                                    <p class="form-control-plaintext">{{ currentUser.emailVerified }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="plan">Plan:</label>
+                                    <p class="form-control-plaintext">{{ currentUser.plan }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="photoURL">Foto de perfil:</label>
+                                    <p class="form-control-plaintext">{{ currentUser.photoURL }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <app-footer id="adminFooter"></app-footer>
+    </div>
+
+</section>

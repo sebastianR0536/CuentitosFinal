@@ -1,0 +1,63 @@
+<app-navegador></app-navegador>
+
+<div class="tools">
+    <form #categoryForm="ngForm" (ngSubmit)="category(categoryForm, selectedGenre)">
+        <mat-form-field appearance="fill">
+            <mat-label>{{'seccion.FiltrarGenero' | transloco}}</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let g of gnr" [value]="g.value"
+                    (click)="selectedGenre = g.value; categoryForm.ngSubmit.emit()">
+                    {{g.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+    <form #searchForm="ngForm" (ngSubmit)="search(searchForm, searchTerm.value)">
+        <div class="input-group mb-3">
+            <input id="searchInput" type="text" class="form-control" placeholder="Nombre de libro..." #searchTerm
+                ngModel>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<section>
+    <div *ngIf="searchEnabled" class="search-results">
+        <h1>Resultados de la búsqueda "{{searchTerm.value}}":</h1>
+        <div *ngIf="searchEnabled">
+            <h1>LIBROS:</h1>
+            <article class="firstRow grid">
+                <div *ngFor="let book of searchResults">
+                    <app-card [book]="book"></app-card>
+                </div>
+            </article>
+        </div>
+        <div *ngIf="audioBooksEnabled">
+            <h1>AUDIOLIBROS:</h1>
+            <article class="firstRow grid">
+                <div *ngFor="let audiobook of searchAudioBooks">
+                    <img src={{audiobook.coverart}} class="card-img" alt="..." routerLink="/AUDIOBOOK">
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div *ngIf="genreEnabled" class="search-results">
+        <h1>Género {{selectedGenre}}:</h1>
+        <article class="firstRow grid">
+            <div *ngFor="let book of genreResults">
+                <app-card [book]="book"></app-card>
+            </div>
+        </article>
+    </div>
+</section>
+
+<app-footer id="adminFooter"></app-footer>

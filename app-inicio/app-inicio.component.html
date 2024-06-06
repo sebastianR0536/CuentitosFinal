@@ -1,0 +1,67 @@
+<app-navegador></app-navegador>
+<section class="panel">
+  <app-banner [books]="books"></app-banner>
+  <h1 class="CT">{{'seccion.MásLeídos' | transloco}}</h1>
+  <swiper 
+  [slidesPerView]="5"
+  (swiper)="onSwiper($event)"
+  [centeredSlides]="true"
+  [centeredSlidesBounds]="true"
+  (slideChange)="onSlideChange()"
+  [navigation]="true"
+  >
+      <ng-template *ngFor="let book of categories[0][2];let i = index" swiperSlide>
+        <app-card [book]="book"></app-card>
+      </ng-template>
+
+  </swiper>
+
+
+
+  <h1 class="CT">{{'seccion.MásComentados' | transloco}}</h1>
+  <swiper 
+  [slidesPerView]="5"
+  (swiper)="onSwiper($event)"
+  [centeredSlides]="true"
+  [centeredSlidesBounds]="true"
+  (slideChange)="onSlideChange()"
+  [navigation]="true"
+  >
+    <ng-template *ngFor="let book of categories[1][2];let i = index" swiperSlide>
+      <app-card [book]="book"></app-card>
+    </ng-template>
+  </swiper>
+
+  <app-carousel-open [books]="books"></app-carousel-open>
+
+  <h1 class="CT">{{'seccion.MásVotados'| transloco}}</h1>
+  <swiper  
+  [slidesPerView]="5"
+  (swiper)="onSwiper($event)"
+  [centeredSlides]="true"
+  [centeredSlidesBounds]="true"
+  (slideChange)="onSlideChange()"
+  [navigation]="true"
+  >
+    <ng-template *ngFor="let book of categories[2][2];let i = index" swiperSlide>
+      <app-card [book]="book"></app-card>
+    </ng-template>
+  </swiper>
+
+  <h1 class="CT">{{'seccion.MásRecientes'| transloco}}</h1>
+  <swiper 
+  [slidesPerView]="5"
+  (swiper)="onSwiper($event)"
+  [centeredSlides]="true"
+  [centeredSlidesBounds]="true"
+  (slideChange)="onSlideChange()"
+  [navigation]="true"
+  >
+    <ng-template *ngFor="let book of categories[3][2];let i = index" swiperSlide>
+      <app-card [book]="book"></app-card>
+    </ng-template>
+  </swiper>
+  <br>
+</section>
+
+<app-footer></app-footer>

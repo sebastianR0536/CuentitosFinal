@@ -1,0 +1,100 @@
+.panel {
+    margin-top: 50px;
+}
+
+.firstRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.iconousuario {
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: -70px;
+    z-index: 2;
+    background-color: white;
+}
+
+.usuario_info h2{
+    margin-left: 140px;
+    margin-bottom: 0%;
+}
+
+.usuario_info .linea-horizontal {
+  height: 1px;
+  width: 100%;
+  background-color: black;
+  z-index: 1;
+  margin-bottom: 4px;
+}
+
+.usuario_info .btn {
+    background-color: #dfd8df;
+    margin-inline: 1px;
+    font-size: 15px;
+}
+
+.usuario_info .seccionBotones{
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.usuario_info .botonesSeleccion{
+    margin-left: 140px;
+}
+
+.usuario_info .botonesSeguidores{
+    margin-right: 20px;
+}
+
+
+
+.tituloCarrusel h2{
+    display: inline-block;
+    margin-left: 1em;
+    margin-right: 5px;
+    margin-top: 1em;
+}
+
+.tituloCarrusel svg{
+    margin-top: -5px;
+}
+
+.carousel-control-next, .carousel-control-prev{
+    width: 5%;
+}
+
+
+.notification-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .notification {
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .notification:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  
+  .notification p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .notification-line {
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin-top: 10px;
+  }
+  

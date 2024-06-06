@@ -1,0 +1,175 @@
+/*CSS GENERAL*/
+.banner__contents {
+  position: absolute;
+  left: 50px;
+}
+
+.banner__description {
+  position: relative;
+  color: var(--paragraph) ;
+}
+
+/*Carousel*/
+
+.carousel-banner{
+  top: 400px;
+  height: 62px;
+  position: absolute;
+  background-color: var(--btn-bg-color);
+}
+
+/* banner */
+.text-banner {
+  opacity: 0.8;
+  border-bottom: 1000px solid transparent;
+  border-left: 868px solid var(--bk-radius-banner);
+  z-index: 0;
+}
+
+.banner-prev,.banner-next{
+  position: relative;
+  background-color: var(--btn-bg-color);
+  margin-inline: 20px;
+}
+
+.carousel-inner-banner{
+  display: flex !important;
+  align-items: center;
+}
+
+.banner-carousel{
+  display: flex;
+
+}
+.banner-carousel img{
+  width: 50px !important;
+  height: 50px !important;
+  margin:10px;
+}
+.banner {
+    overflow: hidden !important;
+    margin-inline: 20px;
+    margin-top: 37px;
+    border-radius: 15px;
+    background-image: url('https://i1.wp.com/www.24symbols.com/24stories/wp-content/uploads/2019/12/BestOf2019_es.png?fit=1492%2C875&ssl=1');
+    background-size: cover;
+    background-position: center center;
+    object-fit: contain;
+    height: 448px;
+  }  
+  
+  .banner__title {
+    position: relative;
+    font-size: 3rem;
+    font-weight: 800;
+    padding-bottom: 0.3rem;
+    color: var(--text-color) ;
+  }  
+  
+  .banner__button {
+    position: relative;
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: 700;
+    border-radius: 0.2vw;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: var(--btn-bg-color);
+  }
+  
+  .banner__button:hover {
+    color: #000;
+    background-color: var(--btn-bg-color);
+    transition: all 0.2s;
+  }
+  
+  .banner--fadeBottom {
+    margin-top: 145px;
+    height: 7.4rem;
+    background-image: linear-gradient(180deg, transparent, rgba(37, 37, 37, 0.61), var(--bkg-color));
+  }
+
+/*movil*/
+@media screen and (max-width: 700px) {
+  .banner__contents {
+    top: 80px;
+  }
+
+  .banner__title {
+    font-size: 2rem;
+  }
+
+  .banner__description {    
+    width: 15rem;
+    line-height: 1.3;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    max-width: 360px;
+    height: 150px;    
+  }
+  .carousel-banner {
+    right: 60px;
+    width: 290px;
+    margin-left: 20px;
+  }
+
+  .banner-prev,.banner-next{
+    width: 30px;
+    height: 30px;
+  }
+}
+/*ordenador*/
+@media screen and (min-width: 1200px) {
+  .banner__contents {
+    top: 150px;
+  }
+
+  .banner__description {    
+    width: 45rem;
+    line-height: 1.3;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    max-width: 360px;
+    height: 180px;
+  }
+
+  .carousel-banner{
+    right: 102px;
+    width: 421px;
+  }
+
+  .banner-prev,.banner-next{
+    width: 50px;
+    height: 50px;
+  }
+}    
+/*TABLET*/
+@media screen and (min-width: 701px) and (max-width: 1199px) {
+  .banner__contents {
+    top: 120px;
+  }
+
+  .banner__description {    
+    width: 45rem;
+    line-height: 1.3;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    max-width: 360px;
+    height: 180px;
+  }
+
+  .carousel-banner{
+    right: 250px;
+    width: 421px;
+  }
+
+  .banner-prev,.banner-next{
+    width: 50px;
+    height: 50px;
+  }
+}

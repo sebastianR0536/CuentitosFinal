@@ -1,0 +1,39 @@
+<div id="banner" class="banner">
+  <div class="text-banner">
+    <div class="banner__contents">
+
+      <h1 class="banner__title" i18n>Servicio Biblioteca Online</h1>
+    <div class="banner__buttons">
+      <button class="banner__button">{{"banner.read" | transloco}}</button>
+      <button class="banner__button">{{"banner.mylist" | transloco}}</button>
+    </div>
+    <h1 class="banner__description">
+      ¡Bienvenido a nuestra Biblioteca Online! Aquí podrás encontrar una gran variedad de libros para satisfacer tus gustos literarios. Nuestra plataforma te permite acceder a libros de diferentes géneros, desde clásicos hasta contemporáneos, todo al alcance de tus dedos. ¡Disfruta de la experiencia de leer desde la comodidad de tu hogar con nuestra Biblioteca Online!
+    </h1>
+    </div>
+    <div id="CE" class="carousel-banner carousel slide carousel-inner-banner">
+      <button class="carousel-control-prev banner-prev" type="button" data-bs-target="#CE" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden" i18n>Previous</span>
+      </button>
+      <div class="carousel-inner ">
+        <div class="carousel-item active">
+          <article class="banner-carousel">
+            <img *ngFor="let item of books.slice(0,4);let i = index" (click)="banner(a.src,item.title, item.sinopsis)" #a src={{item.imageURL}} class="d-block w-100" alt="...">
+          </article>
+        </div>
+        <div class="carousel-item">
+          <article class="banner-carousel">
+            <img *ngFor="let item of books.slice(4,8);let i = index" (click)="banner(b.src,item.title, item.sinopsis)" #b src={{item.imageURL}} class="d-block w-100" alt="...">
+          </article>
+         
+        </div>
+      </div>
+      <button class="carousel-control-next banner-next" type="button" data-bs-target="#CE" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden" i18n>Next</span>
+      </button>
+    </div>
+  </div>
+
+</div>

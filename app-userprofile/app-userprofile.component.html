@@ -1,0 +1,72 @@
+<app-navegador></app-navegador>
+<section class="panel">
+    <div class="usuario_info">
+       <!--<img [src]="userInformation?.photoURL" width="100" height="100" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" class="iconousuario">-->
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz0DnVgk-2qQYe-4MgFmbMfeZfk8qqkb0yhg&usqp=CAU" width="100" height="100" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" class="iconousuario">
+        
+            <!-- <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/> -->
+        <h2>{{userInformation?.displayName}}</h2>
+        <div class="linea-horizontal"></div>
+        <div class="seccionBotones">
+          <div class="botonesSeleccion">
+            <button class="btn" (click)="mostrardatos(true)">{{"userprofile.personalData" | transloco}}</button>
+            <button class="btn" (click)="mostrardatos(false)">{{"userprofile.collections" | transloco}}</button>
+          </div>
+          <div class="botonesSeguidores">
+            <button *ngIf="viewnoti" class="btn" data-bs-toggle="modal" data-bs-target="#notificationsModal" [ngStyle]="notifications ? {'background-color': 'orange'} : {'background-color': '#DFD8DF'}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope"
+                viewBox="0 0 16 16">
+                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+              </svg>
+            </button>
+            <button class="btn" (click)="algo()">{{"userprofile.followers" | transloco}}</button>
+            <button class="btn" (click)="algo()">{{"userprofile.followed" | transloco}}</button>
+          </div>
+        </div>
+        </div>
+
+        <!-- notificationsModal -->
+        <div class="modal fade" id="notificationsModal" tabindex="-1" aria-labelledby="notificationsModal"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        {{ "userprofile.notifications" | transloco }}
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body notification-container" #modal>
+                  <div class="notification" *ngFor="let notification of this.userInformation?.notifications">
+                    <p>{{notification}}</p>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="deleteNotifications()">
+                      {{ "userprofile.deleteNotifications" | transloco }}
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        {{ "admin.close" | transloco }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-userdata *ngIf="dates; else collections"
+    [user]="userInformation"
+    [username]="userInformation?.displayName"
+    [email]="userInformation?.email"
+    [verificado]="userInformation?.emailVerified"
+    [plan]="userInformation?.plan"></app-userdata>
+    <ng-template #collections>
+      <app-collections 
+      [booksfavISBN]="userInformation!.favoriteBooksList!"
+      [bookspengISBN]="userInformation!.pendingBooksList!"
+      [booksreadISBN]="userInformation!.readingBooksList!"
+      [booksfinISBN]="userInformation!.finishedBooksList!"></app-collections>
+    </ng-template>
+</section>
+<app-footer></app-footer>

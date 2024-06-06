@@ -1,0 +1,83 @@
+.grid-userinformation .field{
+    margin-left: 30px;
+    display: grid;
+    margin-bottom: 20px;
+}
+
+.grid-userinformation input[type="text"]{
+    width: 50%;
+    font-size: 20px;
+}
+
+.grid-userinformation input[type="password"]{
+    width: 50%;
+    font-size: 20px;
+}
+
+.grid-userinformation label{
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.grid-userinformation input[type="text"]:disabled{
+    color: black;
+    background-color: white;
+    border: none;
+}
+
+.grid-userinformation .verificación{
+    margin-bottom: 0px;
+}
+
+.grid-userinformation .plan{
+    font-size: 20px;
+}
+
+.grid-userinformation .buttonsModify{
+    margin: 2em;
+}
+
+h1{
+    font-size: 35px;
+}
+
+.inputerror{
+    margin-top: 10px;
+}
+
+.errores {
+    color: red;
+    margin-bottom: 1em;
+}
+
+
+
+
+
+/*ordenador*/
+@media screen and (min-width: 1200px) {
+    .grid-userinformation{
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+/*tablet*/
+@media screen and (max-width: 1199px) and (max-width: 701px) {
+    .grid-userinformation{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/*movil*/
+@media screen and (max-width: 700px) {
+    .grid-userinformation{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+

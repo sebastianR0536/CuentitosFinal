@@ -1,0 +1,33 @@
+<section>
+    <div class="container">
+        <div class="carousel">
+            <input type="radio" name="slides" checked="checked" id="slide-1">
+            <input type="radio" name="slides" id="slide-2">
+            <input type="radio" name="slides" id="slide-3">
+            <input type="radio" name="slides" id="slide-4">
+            <input type="radio" name="slides" id="slide-5">
+            <input type="radio" name="slides" id="slide-6">
+            <ul class="carousel__slides">
+                <li class="carousel__slide" *ngFor="let item of books;let i = index" >
+                    <figure *ngIf="i<6">
+                        <div>
+                            <img src={{item.imageURL}} alt="">
+                        </div>
+                        <figcaption>
+                            <h1>{{item.title}}</h1>
+                            <span class="credit">{{"bookdescription.author" | transloco}}: {{item.author}}</span><br>
+                            {{item.sinopsis}}
+                            
+                        </figcaption>
+                    </figure>
+                </li>
+ 
+            </ul>    
+            <ul class="carousel__thumbnails">
+                <li *ngFor="let item of books;let i = index">
+                    <label *ngIf="i<6" for="slide-{{i+1}}"><img src={{item.imageURL}}  alt=""></label>
+                </li>       
+            </ul>
+        </div>
+    </div>
+</section>

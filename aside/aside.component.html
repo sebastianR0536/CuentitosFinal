@@ -1,0 +1,39 @@
+<div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100vh;">
+  <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <svg class="bi me-2" width="40" height="32">
+      <use xlink:href="#bootstrap"></use>
+    </svg>
+    <span class="fs-4">Dashboard</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <button class="nav-link" (click)="enviar(true)">
+        {{"aside.books" | transloco}}
+      </button>
+    </li>
+    <li>
+      <button class="nav-link" (click)="enviar(false)">
+        {{"aside.users" | transloco}}
+      </button>
+    </li>
+  </ul>
+  <hr>
+  <div id="opciones">
+    <div class="input-group mb-3" i18n>
+      <span class="input-group-text" id="inputGroup-sizing-default">{{"aside.search" | transloco}}</span>
+      <input type="text" class="form-control" aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="Filtrar">
+      <select class="form-select" aria-label="Default select example" onchange="ordenar(value,0)">
+        <option selected>{{"aside.sortbydefault" | transloco}}</option>
+        <option value="1">{{"aside.sortbyname1" | transloco}}</option>
+        <option value="2">{{"aside.sortbyname2" | transloco}}</option>
+        <option value="3">{{"aside.sortbyprice1" | transloco}}</option>
+        <option value="4">{{"aside.sortbyprice2" | transloco}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="flex-grow-1"></div>
+</div>
